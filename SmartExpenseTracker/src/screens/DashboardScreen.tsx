@@ -1,8 +1,9 @@
 import React, { useMemo, useRef, useEffect } from 'react';
-import { View, FlatList, StyleSheet, Text, Dimensions, Platform, UIManager } from 'react-native';
-import { Expense } from '../../App';
+import { View, FlatList, StyleSheet, Text, Dimensions, Platform, UIManager,ScrollView } from 'react-native';
+import { Expense } from '../types';
 import { PieChart } from 'react-native-chart-kit';
 import { Card, Title, Paragraph, Divider, useTheme } from 'react-native-paper';
+
 
 if (Platform.OS === 'android') UIManager.setLayoutAnimationEnabledExperimental?.(true);
 
@@ -91,11 +92,15 @@ export default function DashboardScreen({ expenses, selectedMonth, selectedYear,
     }));
 
     return (
-      <View style={{ width: screenWidth, padding: 12 }}>
-        {/* Month-Year Label */}
-        <View style={[styles.monthLabelContainer, { backgroundColor: theme.colors.surface }]}>
-          <Text style={[styles.monthLabel, { color: theme.colors.primary }]}>{monthNames[item.month]} {item.year}</Text>
-        </View>
+      <View>
+      {/* Top Month-Year Label (Sticky) */}
+    <View style={[styles.monthLabelContainer, { backgroundColor: theme.colors.background }]}>
+            <Text style={[styles.monthLabel, { color: theme.colors.primary }]}>
+              {monthData.find(m => m.month === selectedMonth && m.year === selectedYear)?.name} {selectedYear}
+            </Text>
+          </View>
+      <ScrollView >
+        <View style={{ width: screenWidth, padding: 12 }}>
 
         {/* Total Spend Card */}
         <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
@@ -175,6 +180,7 @@ export default function DashboardScreen({ expenses, selectedMonth, selectedYear,
           </Card>
         )}
       </View>
+      </ScrollView></View>
     );
   };
 
@@ -202,6 +208,6 @@ export default function DashboardScreen({ expenses, selectedMonth, selectedYear,
 
 const styles = StyleSheet.create({
   card: { marginVertical: 8, borderRadius: 12, elevation: 2 },
-  monthLabelContainer: { padding: 8, alignItems: 'center', borderRadius: 6, marginBottom: 8 },
+  monthLabelContainer: { padding: 8, alignItems: 'center', elevation: 2 },
   monthLabel: { fontWeight: 'bold', fontSize: 18 },
 });

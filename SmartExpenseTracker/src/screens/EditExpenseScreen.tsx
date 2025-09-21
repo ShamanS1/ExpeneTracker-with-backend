@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View, Alert } from 'react-native';
 import { TextInput, Text, Chip, Button, useTheme } from 'react-native-paper';
 import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
-import { Expense } from '../../App';
+import { Expense } from '../types';
 import { categories } from '../constants/categories';
 
 type Props = {
