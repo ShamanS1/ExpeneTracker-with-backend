@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { View, SectionList, FlatList, Text, Dimensions, Platform, UIManager, StyleSheet } from 'react-native';
 import { Card, FAB, TextInput, Chip, Button, IconButton, useTheme, DefaultTheme } from 'react-native-paper';
 import ExpenseItem from '../components/ExpenseItem';
-import { Expense } from '../../App';
+import { Expense } from   '../types';
 import { categories } from '../constants/categories';
 
 if (Platform.OS === 'android') UIManager.setLayoutAnimationEnabledExperimental?.(true);

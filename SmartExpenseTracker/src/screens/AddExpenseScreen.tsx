@@ -3,7 +3,7 @@ import { ScrollView, View, StyleSheet, Alert } from 'react-native';
 import { TextInput, Text, Chip, Button, useTheme } from 'react-native-paper';
 import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
 import { categories } from '../constants/categories';
-import { Expense } from '../../App';
+import { Expense } from '../types';
 
 type Props = {
   navigation: any;

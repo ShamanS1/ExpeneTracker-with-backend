@@ -12,7 +12,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'expense_tracker_profiles', // folder in your Cloudinary account
+    folder: 'expense_tracker_profiles',
     allowed_formats: ['jpg', 'jpeg', 'png'],
     transformation: [{ width: 500, height: 500, crop: 'limit' }],
   },

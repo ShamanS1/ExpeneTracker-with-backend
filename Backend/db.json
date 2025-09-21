@@ -4,13 +4,21 @@
       "id": "1758455655324",
       "email": "shaman@example.com",
       "password": "$2b$10$BtNUEKDq4VXc/z/.gRoSxOBDqfAwfdwoAGnzTwMOO4oy22a03daWu",
-      "profileImage": ""
+      "profileImage": "",
+      "name": "shamans"
     },
     {
       "id": "1758459903808",
-      "name": "Shaman",
+      "name": "Shaman S",
       "email": "shamanhussain@gmail.com",
       "password": "$2b$10$JsgW72AIVrpTrOYNXhVfZOzCxarTMk2RwUdmYR/CkbPPcPLVvs1iK",
+      "profileImage": "https://res.cloudinary.com/dorodwv4v/image/upload/v1758465195/expense_tracker_profiles/vtzcantixdticymdnes6.jpg"
+    },
+    {
+      "id": "1758470454436",
+      "name": "Shaman2",
+      "email": "abc@gmail.com",
+      "password": "$2b$10$x/XB3duMhk0/nD0p0FU6RuLwk2QWBhD1tKTccsTlxlremsFmTMHKG",
       "profileImage": ""
     }
   ]
