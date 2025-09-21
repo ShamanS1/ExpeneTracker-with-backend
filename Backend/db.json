@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "1758455655324",
+      "email": "shaman@example.com",
+      "password": "$2b$10$BtNUEKDq4VXc/z/.gRoSxOBDqfAwfdwoAGnzTwMOO4oy22a03daWu",
+      "profileImage": ""
+    },
+    {
+      "id": "1758459903808",
+      "name": "Shaman",
+      "email": "shamanhussain@gmail.com",
+      "password": "$2b$10$JsgW72AIVrpTrOYNXhVfZOzCxarTMk2RwUdmYR/CkbPPcPLVvs1iK",
+      "profileImage": ""
+    }
+  ]
+}
