@@ -16,7 +16,7 @@ export default function ProfileScreen({ user, token, onUpdate, onLogout }: Props
   const [profileImage, setProfileImage] = useState<string | undefined>(user.profileImage);
   const [loading, setLoading] = useState(false);
 
-  // Image picker (kept unchanged)
+  // Image picker 
   const pickImage = async () => {
     try {
       const result = await launchImageLibrary({ mediaType: 'photo', quality: 0.5 });
@@ -32,50 +32,66 @@ export default function ProfileScreen({ user, token, onUpdate, onLogout }: Props
     }
   };
 
-  // Profile update (kept unchanged)
+  // Profile update 
   const handleUpdate = async () => {
-    setLoading(true);
-    try {
+  setLoading(true);
+  try {
+    let res;
+
+    if (profileImage && profileImage.startsWith("file://")) {
+      // multipart if image is being uploaded
       const formData = new FormData();
-      formData.append('name', name);
+      formData.append("name", name);
 
-      if (profileImage) {
-        const uri = profileImage.startsWith('file://') ? profileImage : `file://${profileImage}`;
-        const fileName = uri.split('/').pop()!;
-        formData.append('profileImage', {
-          uri,
-          type: 'image/jpeg',
-          name: fileName,
-        } as any);
-      }
+      const uri = profileImage;
+      const fileName = uri.split("/").pop()!;
+      formData.append("profileImage", {
+        uri,
+        type: "image/jpeg",
+        name: fileName,
+      } as any);
 
-      const res = await fetch(`http://192.168.29.47:5001/api/profile`, {
-        method: 'PUT',
+      res = await fetch(`http://192.168.29.47:5001/api/profile`, {
+        method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
-
-      const text = await res.text();
-      let data;
-      try { data = JSON.parse(text); } catch {
-        console.error('Server returned non-JSON:', text);
-        Alert.alert('Error', 'Server returned invalid response');
-        setLoading(false);
-        return;
-      }
-
-      if (res.ok) {
-        onUpdate(data);
-        if (data.profileImage) setProfileImage(data.profileImage);
-        Alert.alert('Success', 'Profile updated successfully');
-      } else {
-        Alert.alert('Error', data.message || 'Update failed');
-      }
-    } catch (e) {
-      console.error(e);
-      Alert.alert('Error', 'Something went wrong');
+    } else {
+      // send JSON if only updating name
+      res = await fetch(`http://192.168.29.47:5001/api/profile`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      });
     }
-    setLoading(false);
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.error("Server returned non-JSON:", text);
+      Alert.alert("Error", "Server returned invalid response");
+      setLoading(false);
+      return;
+    }
+
+    if (res.ok) {
+      onUpdate(data);
+      if (data.profileImage) setProfileImage(data.profileImage);
+      Alert.alert("Success", "Profile updated successfully");
+    } else {
+      Alert.alert("Error", data.message || "Update failed");
+    }
+  } catch (e) {
+    console.error(e);
+    Alert.alert("Error", "Something went wrong");
+  }
+  setLoading(false);
+
   };
 
   return (
